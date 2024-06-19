@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import MovieBox from './MovieBox';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Button, Container, Form, FormControl, Nav, Navbar, NavbarBrand, NavbarCollapse, NavbarToggle } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Container, Form, FormControl, Nav, Navbar, NavbarBrand, NavbarCollapse, NavbarToggle, Row, Spinner } from 'react-bootstrap';
 
 const API_URL = "https://api.themoviedb.org/3/movie/popular?api_key=e7302e09244b40ccd8f190889d0f45d8";
 
@@ -11,14 +11,10 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setMovies(data.results);
-      });
+    fetchMovies(API_URL);
   }, []);
 
   useEffect(() => {
@@ -37,17 +33,23 @@ function App() {
     }
   }, [debouncedQuery]);
 
-  const searchMovie = async(query) => {
-    console.log("Searching");
+  const fetchMovies = async (url) => {
+    setLoading(true);
     try {
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=e7302e09244b40ccd8f190889d0f45d8&query=${query}`;
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
-      setMovies(data.results);
+      const filteredData = data.results.filter(movie => movie.title && movie.poster_path && movie.overview);
+      setMovies(filteredData);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const searchMovie = async (query) => {
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=e7302e09244b40ccd8f190889d0f45d8&query=${query}`;
+    fetchMovies(url);
   };
 
   const changeHandler = (e) => {
@@ -58,19 +60,18 @@ function App() {
     <>
       <Navbar bg='dark' expand='lg' variant='dark'>
         <Container fluid>
-          <NavbarBrand href='/home'>MovieDb App</NavbarBrand>
-          <NavbarBrand href='/home'>Trending</NavbarBrand>
+          <NavbarBrand href='/home'>Movie Search App</NavbarBrand>
           <NavbarToggle aria-controls='navbarScroll'></NavbarToggle>
           <NavbarCollapse id='navbarScroll'>
             <Nav className='me-auto my-2 my-lg-3' style={{ maxHeight: '100px' }} navbarScroll></Nav>
-            <Form className='d-flex'>
-              <FormControl 
-                type='search' 
-                placeholder='Movie Search' 
-                className='me-2' 
-                aria-label='search' 
-                name='query' 
-                value={query} 
+            <Form className='d-flex' autoComplete='off'>
+              <FormControl
+                type='search'
+                placeholder='Movie Search'
+                className='me-2'
+                aria-label='search'
+                name='query'
+                value={query}
                 onChange={changeHandler}
               />
               <Button variant='secondary' type='button' onClick={() => searchMovie(query)}>Search</Button>
@@ -78,15 +79,21 @@ function App() {
           </NavbarCollapse>
         </Container>
       </Navbar>
-      <div>
-        {movies.length > 0 ? (
-          <div className="container">
-            <div className="grid">
-              {movies.map((movieReq) => <MovieBox key={movieReq.id} {...movieReq} />)}
-            </div>
+      <Container className="mt-4">
+        {loading ? (
+          <div className="d-flex justify-content-center">
+            <Spinner animation="border" variant="secondary" />
           </div>
-        ) : (<h2>Sorry !! No Movies Found</h2>)}
-      </div>
+        ) : (
+          <Row>
+            {movies.length > 0 ? (
+              movies.map((movieReq) => <MovieBox key={movieReq.id} {...movieReq} />)
+            ) : (
+              <h2>Sorry !! No Movies Found</h2>
+            )}
+          </Row>
+        )}
+      </Container>
     </>
   );
 }

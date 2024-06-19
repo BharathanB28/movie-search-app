@@ -7,6 +7,7 @@ body{
   text-decoration: none;
   list-style-type: none;
   outline: none;
+  background-color: #0A1E58;
 }
 
 .container{
@@ -26,3 +27,8 @@ body{
 h2{
   background-color: antiquewhite;
 }
+
+p{
+  text-align: justify;
+}
+
