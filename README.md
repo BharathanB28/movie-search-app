@@ -1,27 +1,25 @@
 # Running the Project Locally
 
 ## Clone the Repository
-### git clone <repository-url>
-### cd movie-search-app
+1) git clone <repository-url>
+2) cd movie-search-app
 
 ## Install Dependencies
-### npm install  or yarn install
+1) npm install  or yarn install
 
 ## Set Up Environment Variables
-### Obtain a TMDB API key from TMDB Developer.
-### Replace API_KEY in src/App.js with your TMDB API key.
-### For this assignment I have given my API Key in project.
+1) Obtain a TMDB API key from TMDB Developer.
+2) Replace API_KEY in src/App.js with your TMDB API key.
+3) For this assignment I have given my API Key in project.
 
 ## Run the Application
-### npm start  or yarn start
-
+npm start  or yarn start
 
 
 # Manual Testing: Test the following scenarios manually:
-
-## Ensure movies are displayed correctly on load.
-## Verify the search functionality by typing and submitting queries.
-## Check responsiveness across different devices and screen sizes.
+1) Ensure movies are displayed correctly on load.
+2) Verify the search functionality by typing and submitting queries.
+3) Check responsiveness across different devices and screen sizes.
 
 
 # Functionalities and Improvements
