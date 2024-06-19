@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Modal, ModalBody, ModalHeader, ModalTitle} from 'react-bootstrap';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle} from 'react-bootstrap';
 
 const API_IMG = "https://image.tmdb.org/t/p/w500/";
 
@@ -21,7 +21,7 @@ const MovieBox = ({title, poster_path, vote_average, release_date, overview})=>{
                             <ModalTitle></ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <img src={API_IMG+poster_path} alt="" className="card-img-top" />
+                            <img src={API_IMG+poster_path} alt="" className="card-img-top" style={{width: "14rem"}}/>
                             <h3>{title}</h3>
                             <h4>Imdb: {vote_average}</h4>
                             <h5>Release Date: {release_date}</h5>
@@ -29,6 +29,9 @@ const MovieBox = ({title, poster_path, vote_average, release_date, overview})=>{
                             <h6>OVerview</h6>
                             <p>{overview}</p>
                         </ModalBody>
+                        <ModalFooter>
+                            <Button variant='secondary' onClick={handleClose}>Close</Button>
+                        </ModalFooter>
                     </Modal>
                 </div>
             </div>           
