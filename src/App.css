@@ -1,34 +1,38 @@
+/* Import Google Fonts for use in the document */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
-body{
-  font-family: "Source Sans Pro", "sans-serif";
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  list-style-type: none;
-  outline: none;
-  background-color: #0A1E58;
+/* General body styling */
+body {
+  font-family: "Source Sans Pro", "sans-serif"; 
+  margin: 0; 
+  padding: 0; 
+  text-decoration: none; 
+  list-style-type: none; 
+  outline: none; 
 }
 
-.container{
-  width: 100%;
-  margin: 1em auto;
-  background-color: whitesmoke;
+/* Container styling */
+.container {
+  width: 100%; 
+  margin: 1em auto; 
+  background-color: whitesmoke; 
 }
 
-.grid{
-  display: grid;
-  margin-left: .5px;
-  grid-template-columns: repeat(4,1fr);
-  grid-gap: 0.2em;
-  justify-content: center;
+/* Grid styling for layout */
+.grid {
+  display: grid; 
+  margin-left: .5px; 
+  grid-template-columns: repeat(4, 1fr); 
+  grid-gap: 0.2em; 
+  justify-content: center; 
 }
 
-h2{
-  background-color: antiquewhite;
+/* Heading 2 styling */
+h2 {
+  background-color: antiquewhite; 
 }
 
-p{
-  text-align: justify;
+/* Paragraph styling */
+p {
+  text-align: justify; 
 }
-
